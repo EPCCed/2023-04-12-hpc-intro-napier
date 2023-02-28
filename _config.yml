@@ -32,10 +32,10 @@ remote:
   host: "ln03"
   node: "nid001053"
   location: "EPCC, The University of Edinburgh"
-  homedir: "/home/ta076/ta076/"
+  homedir: "/home/ta106/ta106/"
   user: "userid"
   prompt: "userid@ln03:~>"
-  prompt-work: "userid@uan01:/work/ta076/ta076/userid>"
+  prompt-work: "userid@uan01:/work/ta106/ta106/userid>"
   module_python3: "cray-python"
   bash_shebang: "#!/bin/bash"
 
@@ -66,7 +66,7 @@ sched:
   info: "sinfo"
   comment: "#SBATCH"
   hist: "sacct"
-  project: ta076
+  project: ta106
 
 
 #episode_order:
