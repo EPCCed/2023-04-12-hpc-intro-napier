@@ -44,13 +44,13 @@ jobs on the cluster - including input parameters, job options and resources used
 Before we work on benchmarking, it is useful to define some terms for the example we will
 be using
 
-  - **Program** The computer program we are executing (`sharpen` in the examples below)
+  - **Program** The computer program we are executing (`pi-mpi.py` in the examples below)
   - **Application** The combination of computer program with particular input parameters
-     (`sharpen` with `fuzzy.pgm` in our example below)
+     (`pi-mpi.py` with `fuzzy.pgm` in our example below)
 
 ## Accessing the software and input
 
-{% include {{ site.snippets }}/resources/sharpen-details.snip %}
+{% include {{ site.snippets }}/resources/pi-mpi-details.snip %}
 
 ## Baseline: running in serial
 
@@ -60,11 +60,11 @@ is usually the minimum number of cores or nodes you can run on. However, for und
 how best to use resources, as we are doing here, your baseline could be the performance on
 any number of cores or nodes that you can measure the change in performance from.
 
-Our `sharpen` application is small enough that we can run a serial (i.e. using a single core)
+Our `pi-mpi.py` application is small enough that we can run a serial (i.e. using a single core)
 job for our baseline performance so that is where we will start
 
 > ## Run a single core job
-> Write a job submission script that runs the `sharpen` application on a single core. You
+> Write a job submission script that runs the `pi-mpi.py` application on a single core. You
 > will need to take an initial guess as to the walltime to request to give the job time 
 > to complete. Submit the job and check the contents of the STDOUT file to see if the 
 > application worked or not.
@@ -96,12 +96,12 @@ job for our baseline performance so that is where we will start
 
 Once your job has run, you should look in the output to identify the performance. Most 
 HPC programs should print out timing or performance information (usually somewhere near
-the bottom of the summary output) and `sharpen` is no exception. You should see two 
+the bottom of the summary output) and `pi-mpi.py` is no exception. You should see two 
 lines in the output that look something like:
 
 ```
-Calculation time was 5.579000 seconds
-Overall run time was 5.671895 seconds
+256 core(s), 100000000 samples, 2288.818359 MiB memory, 0.135041 seconds, -0.004774% error
+Total run time=0.18654435999997077s
 ```
 {: .language-bash}
 
@@ -123,11 +123,9 @@ use `{{ site.sched.hist }} {{ site.sched.flag.histdetail }}` with the job ID, e.
 ```
 {: .output}
 
-{% include {{ site.snippets }}/resources/view-output.snip %}
-
 ## Running in parallel and benchmarking performance
 
-We have now managed to run the `sharpen` application using a single core and have a baseline
+We have now managed to run the `pi-mpi.py` application using a single core and have a baseline
 performance we can use to judge how well we are using resources on the system.
 
 Note that we also now have a good estimate of how long the application takes to run so we can
@@ -142,12 +140,12 @@ Now we have some data showing the performance of our application we need to try 
 useful conclusions as to what the most efficient set of resources are to use for our jobs. To
 do this we introduce two metrics:
 
-  - **Speedup** The ratio of the baseline runtime (or runtime on the lowest core count)
+  - **Actual speedup** The ratio of the baseline runtime (or runtime on the lowest core count)
     to the runtime at the specified core count. i.e. baseline runtime divided by runtime
     at the specified core count.
   - **Ideal speedup** The expected speedup if the application showed perfect scaling. i.e. if
     you double the number of cores, the application should run twice as fast.
-  - **Parallel efficiency** The percentage of *ideal speedup* actually obtained for a given
+  - **Parallel efficiency** The fraction of *ideal speedup* actually obtained for a given
     core count. This gives an indication of how well you are exploiting the additional resources
     you are using.
 
