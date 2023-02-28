@@ -30,6 +30,7 @@ import sys
 import datetime
 from mpi4py import MPI
 
+wtime1 = MPI.Wtime()
 
 def inside_circle(total_count):
     """Single-processor task for a group of samples.
@@ -50,7 +51,6 @@ def inside_circle(total_count):
     count = len(radii[np.where(radii<=1.0)])
 
     return count
-
 
 if __name__ == '__main__':
     """Main executable.
@@ -118,8 +118,14 @@ if __name__ == '__main__':
         pi_specific = np.pi
         accuracy = 100*(1-my_pi/pi_specific)
 
+        # Print the values of Pi
+        print('Numpy Pi: ', pi_specific)
+        print('My Estimate of Pi: ', my_pi)
+
         # Uncomment either summary format for verbose or terse output
-        # summary = "{:d} core(s), {:d} samples, {:f} MiB memory, {:f} seconds, {:f}% error"
-        summary = "{:d},{:d},{:f},{:f},{:f}"
+        summary = "{:d} core(s), {:d} samples, {:f} MiB memory, {:f} seconds, {:f}% error"
+        # summary = "{:d},{:d},{:f},{:f},{:f}"
         print(summary.format(cpus, n_samples, memory_required, elapsed_time,
                             accuracy))
+
+        print(f"Total run time={MPI.Wtime()-wtime1}s")
