@@ -1,5 +1,5 @@
 ```
-srun --hint=nomultithread --distribution=block:block sharpen-mpi
+srun python pi-mpi.py 10000000
 ```
 
 and this corresponds to the four required items we described above:
@@ -10,4 +10,4 @@ and this corresponds to the four required items we described above:
      and is specified by the option `--ntasks-per-node=16` option.
   2. Total number of parallel processes: in this case this is also 16, because
      we specified 1 node and 16 parallel processes per node.
-  4. Our program and arguments: in this case this is `sharpen-mpi.x`.
+  4. Our program and arguments: in this case this is `python pi-mpi.py 10000000`.

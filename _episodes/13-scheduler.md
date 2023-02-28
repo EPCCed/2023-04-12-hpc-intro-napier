@@ -413,10 +413,12 @@ parallel MPI programs typically requires four things:
     compute nodes each have 32 cores we often want to specify 32 parallel processes per node.
   - The command and arguments for our parallel program.
 
-To illustrate this process, we will use a simple MPI parallel program that sharpens an image.
+{% include {{ site.snippets }}/resources/pi-mpi-details.snip %}
+
+To illustrate this process, we will use a simple MPI parallel program that estimates the value of Pi.
 (We will meet this example program in more detail in a later episode.) Here is a job submission
-script that runs the sharpen program across two compute nodes on the cluster. Create a file
-(e.g. called: `run-sharpen.slurm`) with the contents of this script in it.
+script that runs the program across two compute nodes on the cluster. Create a file
+(e.g. called: `run-pi-mpi.slurm`) with the contents of this script in it.
 
 {% include {{ site.snippets }}/scheduler/parallel-script.snip %}
 
@@ -427,25 +429,12 @@ The parallel launch line for the sharpen program can be seen towards the bottom 
 As for our other jobs, we launch using the `{{ site.sched.submit.name }}` command.
 
 ```
-{{ site.remote.prompt-work }} {{ site.sched.submit.name }} run-sharpen.slurm
+{{ site.remote.prompt-work }} {{ site.sched.submit.name }} run-pi-mpi.slurm
 ```
 {: .language-bash}
 
 
-If your job runs correctly, you should see an output file called
-`sharpened.pgm`
-
-```
-{{ site.remote.prompt-work }} ls -l *.pgm
-```
-{: .language-bash}
-```
-{% include {{ site.snippets }}/scheduler/ls-pgm-output.snip %}
-```
-{: .output}
-
-If you only see `fuzzy.pgm` and not `sharpened.pgm` then look at
-the job log files to work out what went wrong.
+The program generates no output with all details printed to the job log.
 
 {% include {{ site.snippets }}/scheduler/parallel-challenge.snip %}
 

@@ -9,10 +9,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
 
-export PATH=/work/ta076/ta076/shared/bin:$PATH
-export FUZZY_INPUT=/work/ta076/ta076/shared/fuzzy.pgm
+module load cray-python
 
-cp $FUZZY_INPUT .
-
-srun --hint=nomultithread --distribution=block:block sharpen-mpi
+srun python pi-mpi.py 10000000
 ```
