@@ -1,4 +1,4 @@
-> > Creating a file called `submit_sharpen.slurm`:
+> > Creating a file called `submit-pi-mpi.slurm`:
 > > 
 > > ```
 > > #!/bin/bash
@@ -7,29 +7,24 @@
 > > #SBATCH --qos={{ site.sched.qos }}
 > > #SBATCH --reservation={{ site.sched.reservation }}
 > > 
-> > #SBATCH --job-name=sharpen
+> > #SBATCH --job-name=pi-mpi
 > > #SBATCH --nodes=1
 > > #SBATCH --tasks-per-node=1
 > > #SBATCH --time=00:15:00
-> > 
-> > export PATH=/work/ta076/ta076/shared/bin:$PATH
-> > export FUZZY_INPUT=/work/ta076/ta076/shared/fuzzy.pgm
 > >
-> > cp $FUZZY_INPUT .
-> >
-> > srun --hint=nomultithread --distribution=block:block sharpen-mpi
+> > srun python pi-mpi.py 10000000
 > > ```
 > > {: .language-bash}
 > > 
 > > Run application using a single process (i.e. in serial) with a blocking `srun` command:
 > > ```
-> > srun --hint=nomultithread --distribution=block:block sharpen-mpi
+> > srun python pi-mpi.py 10000000
 > > ```
 > > {: .language-bash}
 > > 
 > > Submit with to the batch queue with:
 > > 
 > > ```
-> > {{ site.remote.prompt-work }} {{ site.sched.submit.name }}  submit_sharpen.slurm
+> > {{ site.remote.prompt-work }} {{ site.sched.submit.name }}  submit-pi-mpi.slurm
 > > ```
 > > {: .language-bash}

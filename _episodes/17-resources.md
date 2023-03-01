@@ -76,18 +76,11 @@ job for our baseline performance so that is where we will start
 > > Output in the job log should look something like:
 > >
 > > ```
-> > Input file is: fuzzy.pgm
-> > Image size is 564 x 770
-> > Using a filter of size 17 x 17
-> > Reading image file: fuzzy.pgm
-> > ... done
-> > Starting calculation ...
-> > On core 0
-> > ... finished
-> > Writing output file: sharpened.pgm
-> > ... done
-> > Calculation time was 5.400482 seconds
-> > Overall run time was 5.496556 seconds
+> > Generating 10000000 samples.
+> > Rank 0 generating 10000000 samples on host nid001246.
+> > Numpy Pi:  3.141592653589793
+> > My Estimate of Pi:  3.1416708
+> > 1 core(s), 10000000 samples, 228.881836 MiB memory, 0.423903 seconds, -0.002487% error
 > > ```
 > > {: .language-bash}
 > >
